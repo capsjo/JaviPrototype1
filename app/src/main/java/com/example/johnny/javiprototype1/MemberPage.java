@@ -33,7 +33,7 @@ public class MemberPage extends AppCompatActivity {
                     break;
                 case R.id.navigation_search:
                     mTextMessage.setText("Search");
-                    fragment = new CardFragment();
+                    fragment = new SearchFragment();
                     //    args.putInt("id", 2);
                     //    fragment.setArguments(args);
                     break;
