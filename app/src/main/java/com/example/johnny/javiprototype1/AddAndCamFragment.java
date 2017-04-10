@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 
 public class AddAndCamFragment extends Fragment {
 
@@ -28,8 +30,12 @@ public class AddAndCamFragment extends Fragment {
         View v = inflater.inflate(R.layout.add_cam_fragment, container, false);
         tabLayout = (TabLayout) v.findViewById(R.id.add_cam_tab);
         pager = (ViewPager) v.findViewById(R.id.add_cam_pager);
+        fragment = new UploadFragment();
 
-        pagerAdapter = new PagerAdapter(getFragmentManager());
+        pagerAdapter = new PagerAdapter(getChildFragmentManager());
+        pagerAdapter.add(new UploadFragment());
+        pagerAdapter.add(new HomeFragment());
+
         pager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(pager);
 
@@ -38,12 +44,19 @@ public class AddAndCamFragment extends Fragment {
 
     public class PagerAdapter extends FragmentPagerAdapter{
 
+        private ArrayList<Fragment> frag;
+
         public PagerAdapter(FragmentManager fm) {
             super(fm);
+            frag = new ArrayList<Fragment>();
+        }
+        public void add(Fragment fragment) {
+            frag.add(fragment);
         }
 
         @Override
         public Fragment getItem(int position) {
+            /*
             switch (position){
                 case 0:
                     fragment = new UploadFragment();
@@ -53,6 +66,8 @@ public class AddAndCamFragment extends Fragment {
                     break;
             }
             return fragment;
+            */
+            return frag.get(position);
         }
 
         @Override
