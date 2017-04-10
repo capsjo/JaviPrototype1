@@ -39,7 +39,7 @@ public class MemberPage extends AppCompatActivity {
                     break;
                 case R.id.navigation_add:
                     mTextMessage.setText("Add");
-                    fragment = new CameraFragment();
+                    fragment = new AddAndCamFragment();
                     //    args.putInt("id", 3);
                     //    fragment.setArguments(args);
                     break;

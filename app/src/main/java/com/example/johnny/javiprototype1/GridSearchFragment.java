@@ -30,9 +30,9 @@ public class GridSearchFragment extends Fragment implements SearchView.OnQueryTe
         View v = inflater.inflate(R.layout.grid_search_fragment, container, false);
         mSearchView= (SearchView)v.findViewById(R.id.search_view);
         mGridView = (GridView) v.findViewById(R.id.grid_view);
-        mGridView.setAdapter();
+      //  mGridView.setAdapter();
 
-        mListView.setTextFilterEnabled(true);
+       // mListView.setTextFilterEnabled(true);
         setupSearchView();
         return v;
     }
@@ -66,9 +66,9 @@ public class GridSearchFragment extends Fragment implements SearchView.OnQueryTe
     @Override
     public boolean onQueryTextChange(String newText) {
         if (TextUtils.isEmpty(newText)) {
-            mListView.clearTextFilter();
+     //       mListView.clearTextFilter();
         } else {
-            mListView.setFilterText(newText.toString());
+       //     mListView.setFilterText(newText.toString());
         }
         return true;
     }
