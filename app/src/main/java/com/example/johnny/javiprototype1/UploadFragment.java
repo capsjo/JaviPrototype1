@@ -142,7 +142,7 @@ public class UploadFragment extends Fragment implements View.OnClickListener, DB
         // RESIZE THE BIT MAP
         matrix.postScale(scaleWidth, scaleHeight);
 
-        // "RECREATE" THE NEW BITMAP
+        // "RECREATE" THE NEW BITMAP1
         Bitmap resizedBitmap = Bitmap.createBitmap(
                 bm, 0, 0, width, height, matrix, false);
         bm.recycle();
