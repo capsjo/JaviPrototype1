@@ -2,9 +2,11 @@ package com.example.johnny.javiprototype1;
 
         import android.content.Intent;
         import android.graphics.Bitmap;
+        import android.graphics.Matrix;
         import android.graphics.drawable.BitmapDrawable;
         import android.net.Uri;
         import android.os.Bundle;
+        import android.provider.MediaStore;
         import android.support.annotation.Nullable;
         import android.support.v4.app.Fragment;
         import android.util.Log;
@@ -48,6 +50,7 @@ public class UploadFragment extends Fragment implements View.OnClickListener, DB
     private HashMap<String, String> params;
     private ArrayList<Bitmap> selectedImages;
     private PhotoAdapter photoAdapter;
+    static final int REQUEST_IMAGE_CAPTURE = 2;
 
     @Nullable
     @Override
@@ -79,6 +82,10 @@ public class UploadFragment extends Fragment implements View.OnClickListener, DB
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.captureButton:
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                }
                 break;
             case R.id.searchButton:
                 Intent intent = new Intent();
@@ -111,7 +118,35 @@ public class UploadFragment extends Fragment implements View.OnClickListener, DB
                     inputPhotoView.setImageURI(selectedImageUri);
                 }
                 break;
+            case REQUEST_IMAGE_CAPTURE:
+                if(resultCode == RESULT_OK)
+                {
+                    // Dans le cas de la caméra, on sait qu'il existe une image
+                    // de type Bitmap dans l'extra "data"
+                    Bundle extras = data.getExtras();
+                    Bitmap img = (Bitmap)extras.get("data");
+                    img = getResizedBitmap(img, 650, 500);
+                    inputPhotoView.setImageBitmap(img);
+                }
+                break;
+
         }
+    }
+    public Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
+        int width = bm.getWidth();
+        int height = bm.getHeight();
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+        // CREATE A MATRIX FOR THE MANIPULATION
+        Matrix matrix = new Matrix();
+        // RESIZE THE BIT MAP
+        matrix.postScale(scaleWidth, scaleHeight);
+
+        // "RECREATE" THE NEW BITMAP
+        Bitmap resizedBitmap = Bitmap.createBitmap(
+                bm, 0, 0, width, height, matrix, false);
+        bm.recycle();
+        return resizedBitmap;
     }
 
     @Override
