@@ -16,38 +16,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextInputLayout usernameInput;
     private TextInputLayout passwordInput;
     private Button signinButton;
+    private Button createAccountButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-/*
-        ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.CAMERA},
-                1);
-*/
 
         usernameInput = (TextInputLayout) findViewById(R.id.user_layout);
         passwordInput = (TextInputLayout) findViewById(R.id.password_layout);
 
         signinButton = (Button) findViewById(R.id.signin_button);
         signinButton.setOnClickListener(this);
+
+        createAccountButton = (Button) findViewById(R.id.create_button);
+        createAccountButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        String user = usernameInput.getEditText().getText().toString();
-        String password = passwordInput.getEditText().getText().toString();
-        if(authent(user, password)){
-            Intent intent = new Intent(this, MemberPage.class);
-            intent.putExtra("key", "info to put");
-            startActivity(intent);
-            finish();
+        switch (v.getId()) {
+            case R.id.signin_button:
+                String user = usernameInput.getEditText().getText().toString();
+                String password = passwordInput.getEditText().getText().toString();
+                if (authent(user, password)) {
+                    Intent intent = new Intent(this, MemberPage.class);
+                    intent.putExtra("key", "info to put");
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Invalid username or password", Toast.LENGTH_LONG).show();
+                }
+                break;
+            case R.id.create_button:
+                Intent signinPage = new Intent(this, SignUpActivity.class);
+                startActivity(signinPage);
+                break;
         }
-        else{
-            Toast.makeText(getApplicationContext(), "Invalid username or password", Toast.LENGTH_LONG).show();
-        }
-
     }
 
     public Boolean authent(String user, String password){

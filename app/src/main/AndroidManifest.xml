@@ -2,9 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.johnny.javiprototype1">
 
-
-    <uses-feature android:name="android.hardware.camera" android:required="true"/>
-
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -22,7 +22,9 @@
         </activity>
         <activity
             android:name=".MemberPage"
-            android:label="@string/title_activity_member_page"></activity>
+            android:label="@string/title_activity_member_page" />
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".DetailsActivity"></activity>
     </application>
 
 </manifest>
