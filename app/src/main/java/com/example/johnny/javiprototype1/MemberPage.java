@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 public class MemberPage extends AppCompatActivity {
 
-    private TextView mTextMessage;
     private Fragment fragment;
     private FragmentManager fragmentManager;
     Bundle args;
@@ -26,31 +25,26 @@ public class MemberPage extends AppCompatActivity {
 
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
                     fragment = new HomeFragment();
                     //    args.putInt("id", 1);
                     //    fragment.setArguments(args);
                     break;
                 case R.id.navigation_search:
-                    mTextMessage.setText("Search");
                     fragment = new SearchFragment();
                     //    args.putInt("id", 2);
                     //    fragment.setArguments(args);
                     break;
                 case R.id.navigation_add:
-                    mTextMessage.setText("Add");
                     fragment = new UploadFragment();
                     //    args.putInt("id", 3);
                     //    fragment.setArguments(args);
                     break;
                 case R.id.navigation_profile:
-                    mTextMessage.setText("Profile");
                     fragment = new ProfileFragment();
                     //    args.putInt("id", 4);
                     //    fragment.setArguments(args);
                     break;
                 case R.id.navigation_setting:
-                    mTextMessage.setText("Setting");
                     fragment = new CardFragment();
                     //    args.putInt("id", 5);
                     //    fragment.setArguments(args);
@@ -75,7 +69,6 @@ public class MemberPage extends AppCompatActivity {
         transaction.add(R.id.main_container, fragment).commit();
 
 
-        mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
