@@ -10,11 +10,28 @@ class ImageItem {
 
     private Bitmap image;
     private String title;
+    private String description;
+    private String rating;
 
+    public ImageItem(Bitmap image, String title, String description, String rating) {
+        super();
+        this.image = image;
+        this.title = title;
+        this.description = description;
+        this.rating = rating;
+    }
     public ImageItem(Bitmap image, String title) {
         super();
         this.image = image;
         this.title = title;
+        this.description = "";
+        this.rating = "";
+    }
+    public String getDescription(){
+        return description;
+    }
+    public String getRating(){
+        return rating;
     }
 
     public Bitmap getImage() {

@@ -30,7 +30,7 @@ public class MemberPage extends AppCompatActivity {
                     //    fragment.setArguments(args);
                     break;
                 case R.id.navigation_search:
-                    fragment = new SearchFragment();
+                    fragment = new GridSearchFragment();
                     //    args.putInt("id", 2);
                     //    fragment.setArguments(args);
                     break;
