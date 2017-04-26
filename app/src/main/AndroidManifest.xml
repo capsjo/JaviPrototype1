@@ -24,7 +24,8 @@
             android:name=".MemberPage"
             android:label="@string/title_activity_member_page" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".DetailsActivity"></activity>
+        <activity android:name=".DetailsActivity" />
+        <activity android:name=".UserInfoActivity"></activity>
     </application>
 
 </manifest>

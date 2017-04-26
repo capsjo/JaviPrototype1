@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 public class ProfileFragment extends Fragment {
     private GridView gridView;
     private GridViewAdapter gridAdapter;
+    private Button editButton;
 
     @Nullable
     @Override
@@ -29,6 +31,14 @@ public class ProfileFragment extends Fragment {
         gridView = (GridView) v.findViewById(R.id.gridView);
         gridAdapter = new GridViewAdapter(getContext(), R.layout.grid_item_layout, getData());
         gridView.setAdapter(gridAdapter);
+        editButton = (Button) v.findViewById(R.id.button);
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent userInfo = new Intent(getContext(), UserInfoActivity.class);
+                startActivity(userInfo);
+            }
+        });
 /*
         int nbImage = getData().size();
         nbImage = (nbImage/3) + 1;
