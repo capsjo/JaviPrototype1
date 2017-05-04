@@ -1,0 +1,9 @@
+Account1 : kounidol
+Password1 : 12345
+Account2 : johnnyp
+Password2 : 2222
+
+Commentaires :
+
+1. En modifiant le code dans UploadFragment pour accéder au fichier text json afin de recueillir les villes, UploadFragment ne fonctionne plus.
+2. L'app n'est pas optimiser pour fonctionner sur emulateur. Veuiller utiliser une vrai machine.
