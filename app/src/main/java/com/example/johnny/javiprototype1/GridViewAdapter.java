@@ -2,6 +2,7 @@ package com.example.johnny.javiprototype1;
 
 import android.app.Activity;
 import android.content.Context;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,9 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
 
 import java.util.ArrayList;
 
@@ -22,13 +26,15 @@ class GridViewAdapter extends ArrayAdapter implements Filterable{
     private Context context;
     private int layoutResourceId;
     private ArrayList data = new ArrayList();
+    private ImageLoader imageLoader;
 
 
-    public GridViewAdapter(Context context, int layoutResourceId, ArrayList data) {
+    public GridViewAdapter(Context context, int layoutResourceId, ArrayList data, ImageLoader imageLoader) {
         super(context, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
         this.context = context;
         this.data = data;
+        this.imageLoader = imageLoader;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -39,7 +45,7 @@ class GridViewAdapter extends ArrayAdapter implements Filterable{
             row = inflater.inflate(layoutResourceId, parent, false);
             holder = new ViewHolder();
             holder.imageTitle = (TextView) row.findViewById(R.id.text);
-            holder.image = (ImageView) row.findViewById(R.id.image);
+            holder.image = (NetworkImageView) row.findViewById(R.id.image);
             row.setTag(holder);
 
         } else {
@@ -47,13 +53,14 @@ class GridViewAdapter extends ArrayAdapter implements Filterable{
         }
         ImageItem item = (ImageItem) data.get(position);
         holder.imageTitle.setText(item.getTitle());
-        holder.image.setImageBitmap(item.getImage());
+        holder.image.setImageUrl(item.getUrl(), imageLoader);
         return row;
     }
 
 
     static class ViewHolder {
         TextView imageTitle;
-        ImageView image;
+        //ImageView image;
+        NetworkImageView image;
     }
 }

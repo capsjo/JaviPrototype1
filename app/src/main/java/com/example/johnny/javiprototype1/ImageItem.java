@@ -10,32 +10,37 @@ class ImageItem {
 
     private Bitmap image;
     private String title;
-    private String description;
-    private String rating;
+    private String url;
+    private String restaurant;
+    private String city;
+    private String username;
 
-    public ImageItem(Bitmap image, String title, String description, String rating) {
-        super();
-        this.image = image;
-        this.title = title;
-        this.description = description;
-        this.rating = rating;
-    }
+
     public ImageItem(Bitmap image, String title) {
         super();
         this.image = image;
         this.title = title;
-        this.description = "";
-        this.rating = "";
     }
-    public String getDescription(){
-        return description;
+    public ImageItem(String url, String title) {
+        super();
+        this.title = title;
+        this.url = url;
     }
-    public String getRating(){
-        return rating;
+    public ImageItem(String url, String title, String username, String restaurant, String city) {
+        super();
+        this.url = url;
+        this.title = title;
+        this.username = username;
+        this.restaurant = restaurant;
+        this.city = city;
     }
 
     public Bitmap getImage() {
         return image;
+    }
+
+    public String getUrl() {
+        return url;
     }
 
     public void setImage(Bitmap image) {
@@ -49,4 +54,16 @@ class ImageItem {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public String getRestaurant(){
+        return restaurant;
+    }
+
+    public String getCity(){
+        return city;
+    }
+
+    public String getUsername(){return username;}
+
+
 }

@@ -12,6 +12,9 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
+
 import java.util.ArrayList;
 
 /**
@@ -24,14 +27,18 @@ class GridSearchAdapter extends ArrayAdapter implements Filterable{
     private Filter imageFilter;
     private ArrayList data = new ArrayList();
     private ArrayList filteredData = new ArrayList();
+    private ImageLoader imageLoader;
+    private String searchtype;
 
 
-    public GridSearchAdapter(Context context, int layoutResourceId, ArrayList data) {
+    public GridSearchAdapter(Context context, int layoutResourceId, ArrayList data, ImageLoader imageLoader, String searchtype) {
         super(context, layoutResourceId, data);
+        this.searchtype= searchtype;
         this.layoutResourceId = layoutResourceId;
         this.context = context;
         this.data = data;
         this.filteredData = data;
+        this.imageLoader = imageLoader;
     }
 
     public int getCount() {
@@ -50,7 +57,7 @@ class GridSearchAdapter extends ArrayAdapter implements Filterable{
             row = inflater.inflate(layoutResourceId, parent, false);
             holder = new ViewHolder();
             holder.imageTitle = (TextView) row.findViewById(R.id.text);
-            holder.image = (ImageView) row.findViewById(R.id.image);
+            holder.image = (NetworkImageView) row.findViewById(R.id.image);
             row.setTag(holder);
 
         } else {
@@ -59,8 +66,7 @@ class GridSearchAdapter extends ArrayAdapter implements Filterable{
             System.out.println("size" + filteredData.size());
             ImageItem item = (ImageItem) filteredData.get(position);
             holder.imageTitle.setText(item.getTitle());
-            holder.image.setImageBitmap(item.getImage());
-
+            holder.image.setImageUrl(item.getUrl(), imageLoader);
 
         return row;
     }
@@ -68,7 +74,8 @@ class GridSearchAdapter extends ArrayAdapter implements Filterable{
 
     static class ViewHolder {
         TextView imageTitle;
-        ImageView image;
+        //ImageView image;
+        NetworkImageView image;
     }
 
     @NonNull
@@ -93,18 +100,49 @@ class GridSearchAdapter extends ArrayAdapter implements Filterable{
                 filterResults.values = data;
                 filterResults.count = data.size();
             }
-            else{
-                int length=data.size();
-                int i=0;
-                while(i<length){
-                    ImageItem item =(ImageItem) data.get(i);
+            else {
+                int length = data.size();
+                int i = 0;
+                ImageItem item;
 
-                    if(item.getTitle().toUpperCase().contains(constraint.toString().toUpperCase())) {
-                        tempList.add(item);
-                    }
-                    else{}
-                    i++;
+                switch (searchtype) {
+
+
+                    case "Uploader Name":
+                        while (i < length) {
+                            item = (ImageItem) data.get(i);
+                            if (item.getUsername().toUpperCase().contains(constraint.toString().toUpperCase())) {
+                                tempList.add(item);
+                            } else {
+                            }
+                            i++;
+                        }
+                        break;
+
+                    case "Restaurant":
+                        while (i < length) {
+                            item = (ImageItem) data.get(i);
+                            if (item.getRestaurant().toUpperCase().contains(constraint.toString().toUpperCase())) {
+                                tempList.add(item);
+                            } else {
+                            }
+                            i++;
+                        }
+                        break;
+
+                    case "City":
+                        while (i < length) {
+                            item = (ImageItem) data.get(i);
+                            if (item.getCity().toUpperCase().contains(constraint.toString().toUpperCase())) {
+                                tempList.add(item);
+                            } else {
+                            }
+                            i++;
+                        }
+                        break;
+
                 }
+
                 //following two lines is very important
                 //as publish result can only take FilterResults objects
                 filterResults.values = tempList;
@@ -112,6 +150,7 @@ class GridSearchAdapter extends ArrayAdapter implements Filterable{
             }
             return filterResults;
         }
+
 
         @SuppressWarnings("unchecked")
         @Override

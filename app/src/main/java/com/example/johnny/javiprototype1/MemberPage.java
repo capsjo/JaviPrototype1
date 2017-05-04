@@ -44,11 +44,6 @@ public class MemberPage extends AppCompatActivity {
                     //    args.putInt("id", 4);
                     //    fragment.setArguments(args);
                     break;
-                case R.id.navigation_setting:
-                    fragment = new CardFragment();
-                    //    args.putInt("id", 5);
-                    //    fragment.setArguments(args);
-                    break;
             }
             final FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.replace(R.id.main_container, fragment).commit();

@@ -47,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/user"
                     android:hint="User Name"
-                    android:inputType="textEmailAddress"
+                    android:inputType="text"
                     android:maxLines="1" />
             </android.support.design.widget.TextInputLayout>
 
@@ -57,12 +57,13 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:id="@+id/editText"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:drawableLeft="@drawable/lock"
                     android:hint="Password"
-                    android:inputType="numberPassword"
+                    android:inputType="textWebPassword"
                     android:maxLines="1" />
             </android.support.design.widget.TextInputLayout>
 
